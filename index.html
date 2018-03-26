@@ -221,17 +221,23 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><code>『从输入URL到页面呈现给用户，这其中涉及了哪些技术？』</code></p>
-<p>这是一个相当经典的面试题目，这道题的背后，涉及了计算机网络、前端渲染两大主要知识点，对于面试官而言，顺着这个问题，可以衍生出很多更具体的问题来考察面试者的知识储备。<br>事实上，这个问题涉及的一些知识虽然看上去很基础很理论化，但是在实际的工程应用中，却又往往不可避开。近日我重新翻看HTTP协议，便发现其中许多细节之前经常用到却又不太理解，遂借此文进行梳理。</p>
-<p>本章主要以HTTP/1.1版本为主，有讲到HTTP/2时会特别指出。</p>
-<h1 id="TCP-IP协议族"><a href="#TCP-IP协议族" class="headerlink" title="TCP/IP协议族"></a>TCP/IP协议族</h1><p>理论的学习中，我们一般学习的经典七层网络模型。但在实际的Web应用中，往往都采用TCP/IP协议族，该协议的基础模型为四层模型，在实际应用时根据具体应用需求有时也有所扩充。<br>【图】</p>
-<p>如图所示，HTTP协议位于应用层，它不涉及数据包（packet）传输，主要规定了客户端和服务器之间的通信格式。</p>
-<h1 id="HTTP协议通信过程"><a href="#HTTP协议通信过程" class="headerlink" title="HTTP协议通信过程"></a>HTTP协议通信过程</h1><p>HTTP协议和TCP/IP协议族内的其他众多协议相同，用于客户端和服务器之间通信。其通信过程相当简单：</p>
+        <p>你可能是一个数据分析师，可能是一个互联网运营，又或者是一个产品经理，总之，你不是计算机相关专业，也从不知道什么计算机网络模型。但是因为工作需要，又或许只是因为个人兴趣，需要了解、学习HTTP协议。那么，这篇文章或许非常适合你。</p>
+<p>如果你是一名程序员，或是学习过计算机网络，或许你可以跳过这篇文章。</p>
+<h1 id="HTTP是什么"><a href="#HTTP是什么" class="headerlink" title="HTTP是什么"></a>HTTP是什么</h1><p><code>『当你访问一个网页，例如www.baidu.com时，你的电脑做了什么？』</code></p>
+<p>这是一个相当经典的技术面试题目，这道题的背后，涉及了计算机网络、前端渲染两大主要知识点，对于面试官而言，顺着这个问题，可以衍生出很多更具体的问题来考察面试者的知识储备。<br>当然，你不是一个技术人员，自然也不需要深入这个问题，在此给出一部分答案：你的电脑和位于远方的服务器在交流一些东西。这听起来有些抽象，我们先换一个场。<br>假设你还处于只能写信交流的年代，你想要找你妈妈要点生活费，你写了一封信给你妈妈，过了几天，你妈妈回信了，同时随信附上了你的生活费。<br>好的，拆解一下，这其中有两个步骤：</p>
 <ol>
-<li>客户端发起请求</li>
-<li>服务器响应该请求并返回</li>
+<li>你写信给你妈妈</li>
+<li>你妈妈回信给你，随便给了你钱</li>
 </ol>
-<h1 id="HTTP协议报文及结构"><a href="#HTTP协议报文及结构" class="headerlink" title="HTTP协议报文及结构"></a>HTTP协议报文及结构</h1><p>由客户端发起的请求报文和服务器的响应报文是不一样的。<br>请求报文如下：</p>
+<p>回到访问网页的的问题，把你替换成你的电脑，服务器替换成你妈妈，生活费替换成网页内容，当访问网页时，类似写信，同样发生了寄出 -》返回这样一个步骤。<br>说了这么多，那什么是HTTP协议呢？我们知道，写信时一般遵循一定格式，就像我们在小学学习过的那样：第一行问候语，换行写正文，再换行署名等等。<br>所谓协议，就是类似这样的一种格式、规范，其作用让你的电脑和服务器更好的沟通。与信件的区别在于，这种格式相对比较复杂，大多数是给电脑阅读而不是给人类，另外，这种格式是世界通用的标准格式。<br>这种格式在上个世纪就已经设定，并在不断更新，因为更新的存在，所以协议存在不同版本，为简单起见，本文主要以HTTP/1.1版本为主，所以你不需要在意版本间的区别。<br>在接下来的讲解中，为了规范，我将用客户端（Client）替换掉你的电脑这样通俗的称呼，对于客户端，你可以理解为除了你以外还有许许多多同样的人在访问服务器，这类访问服务器的电脑，我们统称客户端。</p>
+<h1 id="TCP-IP协议族"><a href="#TCP-IP协议族" class="headerlink" title="TCP/IP协议族"></a>TCP/IP协议族</h1><p>讲HTTP协议就必须要提一些TCP/IP协议族，什么叫协议族？<br>再来看看寄信这个场景，其实除了写和收以外，还存在邮递员，还存在邮递员每天只收一次件等规定，他们每个部分组合起来，才能最终让你和你妈妈能够完成沟通。<br>类似的，HTTP只担当类似信件格式的作用，至于怎么寄，用什么寄，多久寄一次，这些由其他协议完成，而这些不同的协议组成了TCP/IP协议族，他们共同完成了客户端和服务器之间的通信。<br>【图】</p>
+<p>如图所示，HTTP协议位于协议族应用层，而在其他层，不同的协议有自己的作用，当然本文不涉及他们，提到协议族，只是为了让你更好的知道HTTP的配套设施。</p>
+<h1 id="HTTP协议通信过程"><a href="#HTTP协议通信过程" class="headerlink" title="HTTP协议通信过程"></a>HTTP协议通信过程</h1><p>HTTP协议的通信过程相当简单，拆解出来和寄信类似：</p>
+<ol>
+<li>客户端会发送一封”信”给服务器，我们称之为请求报文，这个行为称作请求（Request）。</li>
+<li>服务器收到请求报文后，会发送一个响应报文给客户端，这个行为称作响应（Response）</li>
+</ol>
+<h1 id="HTTP协议报文及结构"><a href="#HTTP协议报文及结构" class="headerlink" title="HTTP协议报文及结构"></a>HTTP协议报文及结构</h1><p>请求报文和响应报文的格式是有所区别的，现在，我们可以来看看他们究竟长什么样了。<br>请求报文如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /form/entry HTTP/1.1</span><br><span class="line">Host: www.baidu.com</span><br><span class="line"></span><br><span class="line">name=cx</span><br></pre></td></tr></table></figure>
 <p>第一行报文，我们一般称为请求行，首先指明这次请求的方法（method）是GET，之后以空格为分界，第二项内容指出请求访问的资源对象位置/form/entry，也就是请求URI，最后指明这次请求使用的协议版本号。<br>第二行开始是请求首部字段(Headers)，首部字段可以有许多行，以行为分界。<br>最后以一个空行为分界，是请求内容实体(Body)。<br>对于首部字段和内容实体的作用在之后会详细说明。<br>类似的，响应报文如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/html</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
