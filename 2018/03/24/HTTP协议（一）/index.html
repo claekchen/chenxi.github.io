@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>HTTP协议（一） | 思考喵生</title>
+  <title>女友也能懂的HTTP协议入门（一） | 思考喵生</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="『从输入URL到页面呈现给用户，这其中涉及了哪些技术？』 这是一个相当经典的面试题目，这道题的背后，涉及了计算机网络、前端渲染两大主要知识点，对于面试官而言，顺着这个问题，可以衍生出很多更具体的问题来考察面试者的知识储备。事实上，这个问题涉及的一些知识虽然看上去很基础很理论化，但是在实际的工程应用中，却又往往不可避开。近日我重新翻看HTTP协议，便发现其中许多细节之前经常用到却又不太理解，遂借此文">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTP协议（一）">
+<meta property="og:title" content="女友也能懂的HTTP协议入门（一）">
 <meta property="og:url" content="https://claekchen.github.io/2018/03/24/HTTP协议（一）/index.html">
 <meta property="og:site_name" content="思考喵生">
 <meta property="og:description" content="『从输入URL到页面呈现给用户，这其中涉及了哪些技术？』 这是一个相当经典的面试题目，这道题的背后，涉及了计算机网络、前端渲染两大主要知识点，对于面试官而言，顺着这个问题，可以衍生出很多更具体的问题来考察面试者的知识储备。事实上，这个问题涉及的一些知识虽然看上去很基础很理论化，但是在实际的工程应用中，却又往往不可避开。近日我重新翻看HTTP协议，便发现其中许多细节之前经常用到却又不太理解，遂借此文">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2018-03-24T08:53:18.742Z">
+<meta property="og:updated_time" content="2018-03-26T09:31:50.294Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTTP协议（一）">
+<meta name="twitter:title" content="女友也能懂的HTTP协议入门（一）">
 <meta name="twitter:description" content="『从输入URL到页面呈现给用户，这其中涉及了哪些技术？』 这是一个相当经典的面试题目，这道题的背后，涉及了计算机网络、前端渲染两大主要知识点，对于面试官而言，顺着这个问题，可以衍生出很多更具体的问题来考察面试者的知识储备。事实上，这个问题涉及的一些知识虽然看上去很基础很理论化，但是在实际的工程应用中，却又往往不可避开。近日我重新翻看HTTP协议，便发现其中许多细节之前经常用到却又不太理解，遂借此文">
   
     <link rel="alternative" href="/atom.xml" title="思考喵生" type="application/atom+xml">
@@ -210,7 +210,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      HTTP协议（一）
+      女友也能懂的HTTP协议入门（一）
     </h1>
   
 
@@ -239,57 +239,15 @@
 </ol>
 <h1 id="HTTP协议报文及结构"><a href="#HTTP协议报文及结构" class="headerlink" title="HTTP协议报文及结构"></a>HTTP协议报文及结构</h1><p>由客户端发起的请求报文和服务器的响应报文是不一样的。<br>请求报文如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /form/entry HTTP/1.1</span><br><span class="line">Host: www.baidu.com</span><br><span class="line"></span><br><span class="line">name=cx</span><br></pre></td></tr></table></figure>
-<p>第一行报文，首先指明这次请求的方法（method）是GET，之后以空格为分界，第二项内容指出请求访问的资源对象位置/form/entry，也就是请求URI，最后指明这次请求使用的协议版本号。<br>第二行开始是请求首部字段，首部字段可以有许多行，以行为分界。<br>最后以一个空行为分界，是请求内容实体。<br>对于首部字段和内容实体的作用在之后会详细说明。<br>类似的，响应报文如下：</p>
+<p>第一行报文，我们一般称为请求行，首先指明这次请求的方法（method）是GET，之后以空格为分界，第二项内容指出请求访问的资源对象位置/form/entry，也就是请求URI，最后指明这次请求使用的协议版本号。<br>第二行开始是请求首部字段(Headers)，首部字段可以有许多行，以行为分界。<br>最后以一个空行为分界，是请求内容实体(Body)。<br>对于首部字段和内容实体的作用在之后会详细说明。<br>类似的，响应报文如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/html</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>响应报文和请求报文的区别主要在于第一行。<br>首先指明协议版本号， 然后是状态码（status code）和原因短语（reason-phrase）。<br>之后的首部字段和内容实体，在结构上与请求报文一致。</p>
+<p>响应报文和请求报文的区别主要在于第一行，相应报文的第一行称为相应行<br>首先指明协议版本号， 然后是状态码（status code）和原因短语（reason-phrase）。<br>之后的首部字段（Headers）和内容实体（Body），在结构上与请求报文一致。</p>
+<h1 id="请求行与响应行"><a href="#请求行与响应行" class="headerlink" title="请求行与响应行"></a>请求行与响应行</h1><p>为了易于理解，我们先忘掉首部字段和内容实体,从最简单的开始请求行与相应行开始讲起。</p>
+<h2 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a>请求行</h2><h3 id="方法（Method）"><a href="#方法（Method）" class="headerlink" title="方法（Method）"></a>方法（Method）</h3><p>方法的作用，是告知服务器本次请求的意图，就像我们去酒店前台时需要先告诉服务员我是想入住、结账还是需要打扫房间。服务器会根据具体的方法进行不同的响应。总的而言，在HTTP/1.1及HTTP/1.0中，有以下方法可以选用：<br>【图】</p>
+<h3 id="资源对象位置（Location）"><a href="#资源对象位置（Location）" class="headerlink" title="资源对象位置（Location）"></a>资源对象位置（Location）</h3><p>想象一下，我们在使用自己电脑的时候，我们打开一个文件需要在一个具体的位置先找到他然后再打开，这个位置可能是桌面，可能是D盘下的movie文件夹。总之，电脑上存放的文件太多太多了，我们需要自己找到自己想要的文件。同样的，服务器上的资源也非常的多，我们需要在请求时告诉服务器我们想要哪个位置的资源。<br>在我们的电脑上，D:/movie/Titanic.mp4这样的标志表示D盘下的movie文件夹中的Titanic.mp4文件，同样的，那么在请求行中，/form/entry就表示服务器里的form文件夹下的entry资源。这里的/符号就单纯的表示一种上下级关系。举个更具体的例子：中国/杭州/西湖。表示中国里的杭州中的西湖。</p>
+<h3 id="协议版本"><a href="#协议版本" class="headerlink" title="协议版本"></a>协议版本</h3><h2 id="响应行"><a href="#响应行" class="headerlink" title="响应行"></a>响应行</h2><h3 id="协议版本-1"><a href="#协议版本-1" class="headerlink" title="协议版本"></a>协议版本</h3><h3 id="状态码、原因短语"><a href="#状态码、原因短语" class="headerlink" title="状态码、原因短语"></a>状态码、原因短语</h3><p>状态码和原因短语其实做的是同一件事，由服务器告诉客户端这次请求的结果状态（成功、失败、处理中等）。其中状态码是为了让客户端快速理解，而原因短语是为了让使用客户端的人理解。例如200 OK，代表请求正常处理完毕，在这种状态下，请求的资源会随之附在这条响应报文的内容实体中。<br>目前已定义的状态码多达几十种，在这不一一介绍，大致而言，状态码由三位数字组成，根据其第一位数字的不同有五种不同分类。<br>【图】</p>
 
       
-      
-        <div class="page-reward">
-          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
-          <div class="hide_box"></div>
-          <div class="shang_box">
-            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
-            <div class="shang_tit">
-              <p>纯属好玩</p>
-            </div>
-            <div class="shang_payimg">
-              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
-            </div>
-              <div class="pay_explain">扫码打赏，你说多少就多少</div>
-            <div class="shang_payselect">
-              
-                <div class="pay_item checked" data-id="alipay">
-                  <span class="radiobox"></span>
-                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
-                </div>
-              
-              
-                <div class="pay_item" data-id="wechat">
-                  <span class="radiobox"></span>
-                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
-                </div>
-              
-            </div>
-            <div class="shang_info">
-              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
-            </div>
-          </div>
-        </div>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
-        <script type="text/javascript">
-          $(".pay_item").click(function(){
-            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
-            var dataid=$(this).attr('data-id');
-            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
-            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
-          });
-          function dashangToggle(){
-            
-            $(".hide_box").fadeToggle();
-            $(".shang_box").fadeToggle();
-          }
-        </script>
       
     </div>
     
@@ -297,12 +255,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/03/24/HTTP协议（一）/">HTTP协议（一）</a></p>
+        <p><span>本文标题:</span><a href="/2018/03/24/HTTP协议（一）/">女友也能懂的HTTP协议入门（一）</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Claek Chen 的个人博客">Claek Chen</a></p>
         <p><span>发布时间:</span>2018年03月24日 - 16时00分</p>
-        <p><span>最后更新:</span>2018年03月24日 - 16时53分</p>
+        <p><span>最后更新:</span>2018年03月26日 - 17时31分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/03/24/HTTP协议（一）/" title="HTTP协议（一）">https://claekchen.github.io/2018/03/24/HTTP协议（一）/</a>
+            <span>原始链接:</span><a class="post-url" href="/2018/03/24/HTTP协议（一）/" title="女友也能懂的HTTP协议入门（一）">https://claekchen.github.io/2018/03/24/HTTP协议（一）/</a>
             <span class="copy-path" data-clipboard-text="原文: https://claekchen.github.io/2018/03/24/HTTP协议（一）/　　作者: Claek Chen" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
@@ -319,7 +277,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP协议族"><span class="toc-number">1.</span> <span class="toc-text">TCP/IP协议族</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP协议通信过程"><span class="toc-number">2.</span> <span class="toc-text">HTTP协议通信过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP协议报文及结构"><span class="toc-number">3.</span> <span class="toc-text">HTTP协议报文及结构</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP协议族"><span class="toc-number">1.</span> <span class="toc-text">TCP/IP协议族</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP协议通信过程"><span class="toc-number">2.</span> <span class="toc-text">HTTP协议通信过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP协议报文及结构"><span class="toc-number">3.</span> <span class="toc-text">HTTP协议报文及结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#请求行与响应行"><span class="toc-number">4.</span> <span class="toc-text">请求行与响应行</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#请求行"><span class="toc-number">4.1.</span> <span class="toc-text">请求行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法（Method）"><span class="toc-number">4.1.1.</span> <span class="toc-text">方法（Method）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源对象位置（Location）"><span class="toc-number">4.1.2.</span> <span class="toc-text">资源对象位置（Location）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#协议版本"><span class="toc-number">4.1.3.</span> <span class="toc-text">协议版本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#响应行"><span class="toc-number">4.2.</span> <span class="toc-text">响应行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#协议版本-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">协议版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#状态码、原因短语"><span class="toc-number">4.2.2.</span> <span class="toc-text">状态码、原因短语</span></a></li></ol></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -392,7 +350,7 @@
             <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/03/24/HTTP协议（一）/">HTTP协议（一）</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/03/24/HTTP协议（一）/">女友也能懂的HTTP协议入门（一）</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
