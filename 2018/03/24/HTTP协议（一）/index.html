@@ -12,10 +12,14 @@
 <meta property="og:site_name" content="思考喵生">
 <meta property="og:description" content="你可能是一个数据分析师，可能是一个互联网运营，又或者是一个产品经理，总之，你不是计算机相关专业，也从不知道什么计算机网络模型。但是因为工作需要，又或许只是因为个人兴趣，需要了解、学习HTTP协议。那么，这篇文章或许非常适合你。 如果你是一名程序员，或是学习过计算机网络，或许你可以跳过这篇文章。 HTTP是什么『当你访问一个网页，例如www.baidu.com时，你的电脑做了什么？』 这是一个相当经">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2018-03-26T13:27:49.289Z">
+<meta property="og:image" content="https://claekimage.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-01%20%E4%B8%8B%E5%8D%883.27.18.png">
+<meta property="og:image" content="https://claekimage.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-01%20%E4%B8%8B%E5%8D%883.27.40.png">
+<meta property="og:image" content="https://claekimage.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-01%20%E4%B8%8B%E5%8D%883.27.53.png">
+<meta property="og:updated_time" content="2018-04-01T07:37:55.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="女友也能懂的HTTP协议入门（一）">
 <meta name="twitter:description" content="你可能是一个数据分析师，可能是一个互联网运营，又或者是一个产品经理，总之，你不是计算机相关专业，也从不知道什么计算机网络模型。但是因为工作需要，又或许只是因为个人兴趣，需要了解、学习HTTP协议。那么，这篇文章或许非常适合你。 如果你是一名程序员，或是学习过计算机网络，或许你可以跳过这篇文章。 HTTP是什么『当你访问一个网页，例如www.baidu.com时，你的电脑做了什么？』 这是一个相当经">
+<meta name="twitter:image" content="https://claekimage.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-01%20%E4%B8%8B%E5%8D%883.27.18.png">
   
     <link rel="alternative" href="/atom.xml" title="思考喵生" type="application/atom+xml">
   
@@ -230,13 +234,13 @@
         <p>你可能是一个数据分析师，可能是一个互联网运营，又或者是一个产品经理，总之，你不是计算机相关专业，也从不知道什么计算机网络模型。但是因为工作需要，又或许只是因为个人兴趣，需要了解、学习HTTP协议。那么，这篇文章或许非常适合你。</p>
 <p>如果你是一名程序员，或是学习过计算机网络，或许你可以跳过这篇文章。</p>
 <h1 id="HTTP是什么"><a href="#HTTP是什么" class="headerlink" title="HTTP是什么"></a>HTTP是什么</h1><p><code>『当你访问一个网页，例如www.baidu.com时，你的电脑做了什么？』</code></p>
-<p>这是一个相当经典的技术面试题目，这道题的背后，涉及了计算机网络、前端渲染两大主要知识点，对于面试官而言，顺着这个问题，可以衍生出很多更具体的问题来考察面试者的知识储备。<br>当然，你不是一个技术人员，自然也不需要深入这个问题，在此给出一部分答案：你的电脑和位于远方的服务器在交流一些东西。这听起来有些抽象，我们先换一个场。<br>假设你还处于只能写信交流的年代，你想要找你妈妈要点生活费，你写了一封信给你妈妈，过了几天，你妈妈回信了，同时随信附上了你的生活费。<br>好的，拆解一下，这其中有两个步骤：</p>
+<p>这是一个相当经典的技术面试题目，这道题的背后，涉及了计算机网络、前端渲染两大主要知识点，对于面试官而言，顺着这个问题，可以衍生出很多更具体的问题来考察面试者的知识储备。<br>当然，你不是一个技术人员，自然也不需要深入这个问题，在此给出一部分答案：你的电脑和位于远方的服务器在交流一些东西。这听起来有些抽象，我们先换一个场景。<br>假设你还处于只能写信交流的年代，你想要找你妈妈要点生活费，你写了一封信给你妈妈，过了几天，你妈妈回信了，同时随信附上了你的生活费。<br>好的，拆解一下，这其中有两个步骤：</p>
 <ol>
 <li>你写信给你妈妈</li>
 <li>你妈妈回信给你，随便给了你钱</li>
 </ol>
 <p>回到访问网页的的问题，把你替换成你的电脑，服务器替换成你妈妈，生活费替换成网页内容，当访问网页时，类似写信，同样发生了寄出 -》返回这样一个步骤。<br>说了这么多，那什么是HTTP协议呢？我们知道，写信时一般遵循一定格式，就像我们在小学学习过的那样：第一行问候语，换行写正文，再换行署名等等。<br>所谓协议，就是类似这样的一种格式、规范，其作用让你的电脑和服务器更好的沟通。与信件的区别在于，这种格式相对比较复杂，大多数是给电脑阅读而不是给人类，另外，这种格式是世界通用的标准格式。<br>这种格式在上个世纪就已经设定，并在不断更新，因为更新的存在，所以协议存在不同版本，为简单起见，本文主要以HTTP/1.1版本为主，所以你不需要在意版本间的区别。<br>在接下来的讲解中，为了规范，我将用客户端（Client）替换掉你的电脑这样通俗的称呼，对于客户端，你可以理解为除了你以外还有许许多多同样的人在访问服务器，这类访问服务器的电脑，我们统称客户端。</p>
-<h1 id="TCP-IP协议族"><a href="#TCP-IP协议族" class="headerlink" title="TCP/IP协议族"></a>TCP/IP协议族</h1><p>讲HTTP协议就必须要提一些TCP/IP协议族，什么叫协议族？<br>再来看看寄信这个场景，其实除了写和收以外，还存在邮递员，还存在邮递员每天只收一次件等规定，他们每个部分组合起来，才能最终让你和你妈妈能够完成沟通。<br>类似的，HTTP只担当类似信件格式的作用，至于怎么寄，用什么寄，多久寄一次，这些由其他协议完成，而这些不同的协议组成了TCP/IP协议族，他们共同完成了客户端和服务器之间的通信。<br>【图】</p>
+<h1 id="TCP-IP协议族"><a href="#TCP-IP协议族" class="headerlink" title="TCP/IP协议族"></a>TCP/IP协议族</h1><p>讲HTTP协议就必须要提一些TCP/IP协议族，什么叫协议族？<br>再来看看寄信这个场景，其实除了写和收以外，还存在邮递员，还存在邮递员每天只收一次件等规定，他们每个部分组合起来，才能最终让你和你妈妈能够完成沟通。<br>类似的，HTTP只担当类似信件格式的作用，至于怎么寄，用什么寄，多久寄一次，这些由其他协议完成，而这些不同的协议组成了TCP/IP协议族，他们共同完成了客户端和服务器之间的通信。<br><img src="https://claekimage.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-01%20%E4%B8%8B%E5%8D%883.27.18.png" alt=""></p>
 <p>如图所示，HTTP协议位于协议族应用层，而在其他层，不同的协议有自己的作用，当然本文不涉及他们，提到协议族，只是为了让你更好的知道HTTP的配套设施。</p>
 <h1 id="HTTP协议通信过程"><a href="#HTTP协议通信过程" class="headerlink" title="HTTP协议通信过程"></a>HTTP协议通信过程</h1><p>HTTP协议的通信过程相当简单，拆解出来和寄信类似：</p>
 <ol>
@@ -249,9 +253,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/html</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 <p>响应报文和请求报文的区别主要在于第一行，相应报文的第一行称为相应行<br>首先指明协议版本号， 然后是状态码（status code）和原因短语（reason-phrase）。<br>之后的首部字段（Headers）和内容实体（Body），在结构上与请求报文一致。</p>
 <h1 id="请求行与响应行"><a href="#请求行与响应行" class="headerlink" title="请求行与响应行"></a>请求行与响应行</h1><p>为了易于理解，我们先忘掉首部字段和内容实体,从最简单的开始请求行与相应行开始讲起。</p>
-<h2 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a>请求行</h2><h3 id="方法（Method）"><a href="#方法（Method）" class="headerlink" title="方法（Method）"></a>方法（Method）</h3><p>方法的作用，是告知服务器本次请求的意图，就像我们去酒店前台时需要先告诉服务员我是想入住、结账还是需要打扫房间。服务器会根据具体的方法进行不同的响应。总的而言，在HTTP/1.1及HTTP/1.0中，有以下方法可以选用：<br>【图】</p>
+<h2 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a>请求行</h2><h3 id="方法（Method）"><a href="#方法（Method）" class="headerlink" title="方法（Method）"></a>方法（Method）</h3><p>方法的作用，是告知服务器本次请求的意图，就像我们去酒店前台时需要先告诉服务员我是想入住、结账还是需要打扫房间。服务器会根据具体的方法进行不同的响应。总的而言，在HTTP/1.1及HTTP/1.0中，有以下方法可以选用：<br><img src="https://claekimage.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-01%20%E4%B8%8B%E5%8D%883.27.40.png" alt=""></p>
 <h3 id="资源对象位置（Location）"><a href="#资源对象位置（Location）" class="headerlink" title="资源对象位置（Location）"></a>资源对象位置（Location）</h3><p>想象一下，我们在使用自己电脑的时候，我们打开一个文件需要在一个具体的位置先找到他然后再打开，这个位置可能是桌面，可能是D盘下的movie文件夹。总之，电脑上存放的文件太多太多了，我们需要自己找到自己想要的文件。同样的，服务器上的资源也非常的多，我们需要在请求时告诉服务器我们想要哪个位置的资源。<br>在我们的电脑上，D:/movie/Titanic.mp4这样的标志表示D盘下的movie文件夹中的Titanic.mp4文件，同样的，那么在请求行中，/form/entry就表示服务器里的form文件夹下的entry资源。这里的/符号就单纯的表示一种上下级关系。举个更具体的例子：中国/杭州/西湖。表示中国里的杭州中的西湖。</p>
-<h3 id="协议版本"><a href="#协议版本" class="headerlink" title="协议版本"></a>协议版本</h3><h2 id="响应行"><a href="#响应行" class="headerlink" title="响应行"></a>响应行</h2><h3 id="协议版本-1"><a href="#协议版本-1" class="headerlink" title="协议版本"></a>协议版本</h3><h3 id="状态码、原因短语"><a href="#状态码、原因短语" class="headerlink" title="状态码、原因短语"></a>状态码、原因短语</h3><p>状态码和原因短语其实做的是同一件事，由服务器告诉客户端这次请求的结果状态（成功、失败、处理中等）。其中状态码是为了让客户端快速理解，而原因短语是为了让使用客户端的人理解。例如200 OK，代表请求正常处理完毕，在这种状态下，请求的资源会随之附在这条响应报文的内容实体中。<br>目前已定义的状态码多达几十种，在这不一一介绍，大致而言，状态码由三位数字组成，根据其第一位数字的不同有五种不同分类。<br>【图】</p>
+<h3 id="协议版本"><a href="#协议版本" class="headerlink" title="协议版本"></a>协议版本</h3><h2 id="响应行"><a href="#响应行" class="headerlink" title="响应行"></a>响应行</h2><h3 id="协议版本-1"><a href="#协议版本-1" class="headerlink" title="协议版本"></a>协议版本</h3><h3 id="状态码、原因短语"><a href="#状态码、原因短语" class="headerlink" title="状态码、原因短语"></a>状态码、原因短语</h3><p>状态码和原因短语其实做的是同一件事，由服务器告诉客户端这次请求的结果状态（成功、失败、处理中等）。其中状态码是为了让客户端快速理解，而原因短语是为了让使用客户端的人理解。例如200 OK，代表请求正常处理完毕，在这种状态下，请求的资源会随之附在这条响应报文的内容实体中。<br>目前已定义的状态码多达几十种，在这不一一介绍，大致而言，状态码由三位数字组成，根据其第一位数字的不同有五种不同分类。<br><img src="https://claekimage.oss-cn-beijing.aliyuncs.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-01%20%E4%B8%8B%E5%8D%883.27.53.png" alt=""></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<li>上野·宣 著, 于均良. 图解HTTP[M]. 人民邮电出版社, 2014. </li>
+</ol>
 
       
       
@@ -264,7 +271,7 @@
         <p><span>本文标题:</span><a href="/2018/03/24/HTTP协议（一）/">女友也能懂的HTTP协议入门（一）</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Claek Chen 的个人博客">Claek Chen</a></p>
         <p><span>发布时间:</span>2018年03月24日 - 16时00分</p>
-        <p><span>最后更新:</span>2018年03月26日 - 21时27分</p>
+        <p><span>最后更新:</span>2018年04月01日 - 15时37分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/03/24/HTTP协议（一）/" title="女友也能懂的HTTP协议入门（一）">https://claekchen.github.io/2018/03/24/HTTP协议（一）/</a>
             <span class="copy-path" data-clipboard-text="原文: https://claekchen.github.io/2018/03/24/HTTP协议（一）/　　作者: Claek Chen" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -283,7 +290,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP是什么"><span class="toc-number">1.</span> <span class="toc-text">HTTP是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP协议族"><span class="toc-number">2.</span> <span class="toc-text">TCP/IP协议族</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP协议通信过程"><span class="toc-number">3.</span> <span class="toc-text">HTTP协议通信过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP协议报文及结构"><span class="toc-number">4.</span> <span class="toc-text">HTTP协议报文及结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#请求行与响应行"><span class="toc-number">5.</span> <span class="toc-text">请求行与响应行</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#请求行"><span class="toc-number">5.1.</span> <span class="toc-text">请求行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法（Method）"><span class="toc-number">5.1.1.</span> <span class="toc-text">方法（Method）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源对象位置（Location）"><span class="toc-number">5.1.2.</span> <span class="toc-text">资源对象位置（Location）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#协议版本"><span class="toc-number">5.1.3.</span> <span class="toc-text">协议版本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#响应行"><span class="toc-number">5.2.</span> <span class="toc-text">响应行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#协议版本-1"><span class="toc-number">5.2.1.</span> <span class="toc-text">协议版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#状态码、原因短语"><span class="toc-number">5.2.2.</span> <span class="toc-text">状态码、原因短语</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP是什么"><span class="toc-number">1.</span> <span class="toc-text">HTTP是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP协议族"><span class="toc-number">2.</span> <span class="toc-text">TCP/IP协议族</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP协议通信过程"><span class="toc-number">3.</span> <span class="toc-text">HTTP协议通信过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP协议报文及结构"><span class="toc-number">4.</span> <span class="toc-text">HTTP协议报文及结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#请求行与响应行"><span class="toc-number">5.</span> <span class="toc-text">请求行与响应行</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#请求行"><span class="toc-number">5.1.</span> <span class="toc-text">请求行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法（Method）"><span class="toc-number">5.1.1.</span> <span class="toc-text">方法（Method）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源对象位置（Location）"><span class="toc-number">5.1.2.</span> <span class="toc-text">资源对象位置（Location）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#协议版本"><span class="toc-number">5.1.3.</span> <span class="toc-text">协议版本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#响应行"><span class="toc-number">5.2.</span> <span class="toc-text">响应行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#协议版本-1"><span class="toc-number">5.2.1.</span> <span class="toc-text">协议版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#状态码、原因短语"><span class="toc-number">5.2.2.</span> <span class="toc-text">状态码、原因短语</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">6.</span> <span class="toc-text">参考文献</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
